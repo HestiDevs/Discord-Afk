@@ -1,6 +1,6 @@
 # Discord-Afk
 Hello 👋 
-This is the code of a basic and simple afk.
+This is the code for a basic and simple afk.
 
 > Command AFK
 
