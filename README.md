@@ -10,7 +10,7 @@ We need the following packages
 
 #How to install
 ```cs
-#npm i discord,js quick.db 
+# npm i discord,js quick.db 
 ```
 
 In collaboration with [KredoF](https://github.com/kredoF)
