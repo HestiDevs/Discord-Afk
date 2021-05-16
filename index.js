@@ -2,6 +2,7 @@ const discord = require("discord.js");
 const client = new discord.Client({
     disableEveryone: true
 })
+let config = require("./config.json")
 
 client.cooldowns = new Discord.Collection();
 client.commands = new Discord.Collection();
@@ -30,13 +31,12 @@ for (const file of eventFiles) {
 }
 
 client.on("message",async message =>{
-    if(message.channel.type == "dm")return;
-    var prefix  =prefixdb.has(message.guild.id) ? await prefixdb.get(message.guild.id) : "s!" 
+var prefix  = config.prefix 
   if(message.author.bot)return;
   if(message.content.match(`^<@!?${client.user.id}>( |)$`)){
   let embed = new Discord.MessageEmbed()
-  .setTitle("Hola! ")
-  .setDescription("Mi prefix es `"+prefix[0]+"`")
+  .setTitle("Hello! ")
+  .setDescription("My prefix is `"+prefix[0]+"`")
   .setThumbnail(client.user.displayAvatarURL())
   .setFooter("usa "+prefix+"help para ver mis comandos")
   .setColor("RANDOM")
@@ -55,7 +55,7 @@ client.on("message",async message =>{
   
   //onlycreator
   if (command.onlycreator && message.author.id !== config.owner){
-    return message.channel.send('Solo mi creador puede ejecutar esto');
+    return message.channel.send('Only my creator can run this');
   }//fin
 
   ///perms to the user
@@ -98,14 +98,13 @@ client.on("message",async message =>{
   
           if (now < expirationTime) {
               const timeLeft = (expirationTime - now) / 1000;
-              return message.channel.send(`Por favor espera ${timeLeft.toFixed(1)} segundos antes de volver a usar \`${prefix}${command.name}\` `);
+              return message.channel.send(`Please wait ${timeLeft.toFixed(1)} sec before using again \`${prefix}${command.name}\` `);
           }
       }
   
       timestamps.set(message.author.id, now);
       setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
   
-   console.log(commandName+" por "+message.author.tag+"en el server "+message.guild.name)
   
   try{
     command.execute(client, message, args , prefix);
