@@ -2,8 +2,6 @@ const Discord = require('discord.js');
 const db = require("quick.db");
 
 
-const Discord = require("discord.js")
-
 module.exports = {
     name:"afk",//command name
     aliases:[],
@@ -20,7 +18,7 @@ async execute(client, message, args , prefix){
     let server = message.guild
     let user = message.author
     let razon = args.join(" ")
-    
+
     if(!razon) razon = "Without reason"
 
         await db.set(`afk-${server.id}.${user.id}`,razon)
