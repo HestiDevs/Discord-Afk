@@ -20,9 +20,6 @@ async execute(client, message, args , prefix){
     let razon = args.join(" ")
 
     if(!razon) razon = "Without reason"
-
-        await db.set(`afk-${server.id}.${user.id}`,razon)
-
         const embed = new Discord.MessageEmbed()
         .setDescription(`✅ **AFK settled down**\n**Reason :** ${razon}`)
         .setColor("RANDOM")
@@ -31,6 +28,11 @@ async execute(client, message, args , prefix){
         .setAuthor(message.author.tag,message.author.avatarURL())
     
         message.channel.send(embed)  
+
+	setTimeout(function(){ 
+		await db.set(`afk-${server.id}.${user.id}`,razon)
+	 }, 750);//To avoid taking away the afk at the same time [you may need more time]
+	//time is measured in milliseconds
 	
     },
 };
