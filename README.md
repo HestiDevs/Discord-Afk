@@ -7,7 +7,7 @@ This is the code for a basic and simple afk.
 
 We need the following packages
 
-`discord,js` and `quick.db`
+`discord.js` and `quick.db`
 
 # How to install
 ```cs
